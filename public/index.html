@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Payment Authorization</title>
+    <script type="module" src="submit.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+      <h2 class="text-xl font-bold mb-4">Payment Authorization Form</h2>
+      <form id="payment-form" class="space-y-4">
+        <label class="block"
+          >Email:
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full p-2 border rounded"
+        /></label>
+
+        <!-- Card Type Selection -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Card Type</label
+          >
+          <div class="flex gap-4 mt-1">
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="cardType"
+                value="Visa"
+                class="text-indigo-600"
+                required
+              />
+              <span class="ml-2">Visa</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="cardType"
+                value="MasterCard"
+                class="text-indigo-600"
+              />
+              <span class="ml-2">MasterCard</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                name="cardType"
+                value="Amex"
+                class="text-indigo-600"
+              />
+              <span class="ml-2">American Express</span>
+            </label>
+          </div>
+        </div>
+        <label class="block"
+          >Account Name:
+          <input
+            type="text"
+            name="accountName"
+            required
+            class="w-full p-2 border rounded"
+        /></label>
+        <label class="block"
+          >Customer Account:
+          <input
+            type="text"
+            name="customerAccount"
+            required
+            class="w-full p-2 border rounded"
+        /></label>
+        <label class="block"
+          >Card Holder Name:
+          <input
+            type="text"
+            name="cardHolderName"
+            required
+            class="w-full p-2 border rounded"
+        /></label>
+        <label class="block"
+          >Card Number:
+          <input
+            type="text"
+            name="cardNumber"
+            required
+            maxlength="19"
+            placeholder="XXXX XXXX XXXX XXXX"
+            class="w-full p-2 border rounded"
+        /></label>
+
+        <label class="block"
+          >Expiry Date:
+          <input
+            type="text"
+            name="expiryDate"
+            required
+            maxlength="5"
+            placeholder="MM/YY"
+            class="w-full p-2 border rounded"
+        /></label>
+        <label class="block"
+          >Process Payments:
+          <div class="flex space-x-4">
+            <label
+              ><input
+                type="radio"
+                name="processPayments"
+                value="Tuesday"
+                class="mr-2"
+              />
+              Every Tuesday</label
+            >
+            <label
+              ><input
+                type="radio"
+                name="processPayments"
+                value="15th"
+                class="mr-2"
+              />
+              15th of the Month</label
+            >
+          </div>
+        </label>
+        <label class="block"
+          >Signature:
+          <input
+            type="text"
+            name="signature"
+            required
+            class="w-full p-2 border rounded"
+        /></label>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white py-2 rounded"
+        >
+          Submit
+        </button>
+      </form>
+      <!-- <script>
+        document
+          .getElementById("payment-form")
+          .addEventListener("submit", async function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch("/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+          });
+      </script> -->
+    </div>
+  </body>
+</html>
