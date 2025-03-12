@@ -25,9 +25,70 @@ const maskCardNumber = (input) => {
 const formatExpiryDate = (input) => {
   let value = input.value.replace(/\D/g, "");
   if (value.length >= 2) {
-    value = value.slice(0, 2) + "/" + value.slice(2, 4);
+    const month = value.slice(0, 2);
+    const year = value.slice(2, 4);
+
+    // Validate month
+    if (parseInt(month) > 12) {
+      value = "12" + year;
+    }
+
+    value = month + (value.length > 2 ? "/" + year : "");
   }
   input.value = value;
+};
+
+const showToast = (message, type = "success") => {
+  Toastify({
+    text: message,
+    duration: 4000,
+    className: `toast-${type}`,
+    gravity: "top",
+    position: "center",
+    style: {
+      background: type === "success" ? "#10B981" : "#EF4444",
+      borderRadius: "8px",
+      padding: "12px 24px",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    },
+    offset: {
+      y: 60,
+    },
+    close: true,
+  }).showToast();
+};
+
+const clearErrors = (form) => {
+  form.querySelectorAll(".error-message").forEach((el) => el.remove());
+  form.querySelectorAll(".border-red-500").forEach((el) => {
+    el.classList.remove("border-red-500");
+  });
+};
+
+const showError = (input, message) => {
+  const errorDiv = document.createElement("div");
+  errorDiv.className = "error-message";
+  errorDiv.textContent = message;
+  input.classList.add("border-red-500");
+  input.parentNode.appendChild(errorDiv);
+};
+
+const setLoading = (form, loading) => {
+  const button = form.querySelector('button[type="submit"]');
+  const spinner = form.querySelector(".spinner");
+  const buttonText = button.querySelector("span");
+
+  if (loading) {
+    button.classList.add("loading");
+    spinner.style.display = "inline-block";
+    button.disabled = true;
+    buttonText.textContent = "Submitting...";
+  } else {
+    button.classList.remove("loading");
+    spinner.style.display = "none";
+    button.disabled = false;
+    buttonText.textContent = "Submit";
+  }
 };
 
 const initForm = () => {
@@ -37,29 +98,33 @@ const initForm = () => {
   const cardTypeInputs = form.querySelectorAll('input[name="cardType"]');
 
   // Add input masking for card number
-  cardNumberInput.addEventListener("input", (e) => {
+  cardNumberInput?.addEventListener("input", (e) => {
     maskCardNumber(e.target);
   });
 
   // Add input masking for expiry date
-  expiryDateInput.addEventListener("input", (e) => {
+  expiryDateInput?.addEventListener("input", (e) => {
     formatExpiryDate(e.target);
   });
 
   // Update card number validation when card type changes
   cardTypeInputs.forEach((input) => {
     input.addEventListener("change", () => {
-      cardNumberInput.value = "";
+      if (cardNumberInput) {
+        cardNumberInput.value = "";
+      }
     });
   });
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
+    clearErrors(form);
+    setLoading(form, true);
+
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // Validate the form data
       const validatedData = paymentSchema.parse(data);
 
       const response = await fetch("/submit", {
@@ -73,16 +138,23 @@ const initForm = () => {
       }
 
       const result = await response.json();
-      alert(result.message);
+      showToast(result.message);
       form.reset();
     } catch (error) {
       if (error.errors) {
         // Zod validation errors
-        const errorMessages = error.errors.map((err) => err.message).join("\n");
-        alert(errorMessages);
+        error.errors.forEach((err) => {
+          const field = form.querySelector(`[name="${err.path[0]}"]`);
+          if (field) {
+            showError(field, err.message);
+          }
+        });
+        showToast("Please fix the validation errors", "error");
       } else {
-        alert(error.message || "Error submitting form. Please try again.");
+        showToast(error.message || "Error submitting form", "error");
       }
+    } finally {
+      setLoading(form, false);
     }
   });
 };

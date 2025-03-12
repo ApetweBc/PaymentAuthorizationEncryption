@@ -9,6 +9,54 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <style>
+      .error-message {
+        color: #dc2626;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+      .loading {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+      .spinner {
+        display: none;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 0.5rem;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .toast-success {
+        color: white;
+        font-weight: 500;
+      }
+
+      .toast-error {
+        color: white;
+        font-weight: 500;
+      }
+
+      .toastify {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+      }
+    </style>
   </head>
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
@@ -137,9 +185,10 @@
         /></label>
         <button
           type="submit"
-          class="w-full bg-blue-500 text-white py-2 rounded"
+          class="w-full bg-blue-500 text-white py-2 rounded flex items-center justify-center"
         >
-          Submit
+          <span>Submit</span>
+          <div class="spinner ml-2"></div>
         </button>
       </form>
       <!-- <script>

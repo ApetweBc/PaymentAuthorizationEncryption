@@ -14,6 +14,7 @@ app.use(express.static(join(__dirname, "public")));
 // Routes
 app.post("/submit", async (req, res) => {
   try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await encryptAndSendEmail(req.body);
     res.json({ message: "Form submitted successfully!" });
     console.log(res.json);
