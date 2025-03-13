@@ -58,7 +58,7 @@
       }
     </style>
   </head>
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
     <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
       <h2 class="text-xl font-bold mb-4">Payment Authorization Form</h2>
       <form id="payment-form" class="space-y-4">
@@ -73,9 +73,7 @@
 
         <!-- Card Type Selection -->
         <div>
-          <label class="block text-sm font-medium text-gray-700"
-            >Card Type</label
-          >
+          <span class="block text-sm font-medium text-gray-700">Card Type</span>
           <div class="flex gap-4 mt-1">
             <label class="inline-flex items-center">
               <input
@@ -153,7 +151,7 @@
             class="w-full p-2 border rounded"
         /></label>
         <label class="block"
-          >Process Payments:
+          >Please process payments:
           <div class="flex space-x-4">
             <label
               ><input
@@ -187,28 +185,22 @@
           type="submit"
           class="w-full bg-blue-500 text-white py-2 rounded flex items-center justify-center"
         >
-          <span>Submit</span>
+          <span>Authorize Card</span>
           <div class="spinner ml-2"></div>
         </button>
+
+        <p class="text-gray-600 text-sm mt-4 border-t pt-4">
+          Please note if the 15th falls on a weekend, payments will be processed
+          on the last business day before the weekend. <br />
+          This authorization will be in effect until notice of cancellation is
+          forwarded in writing to Cerum Dental Supplies/Cerum Ortho Organizers.
+          <br />
+          Toll Free Phone: 1-800-661-1169 <br />
+          Toll Free Fax: 1-888-747-1233 <br />
+          * Please provide an email address to receive statements
+          electronically.
+        </p>
       </form>
-      <!-- <script>
-        document
-          .getElementById("payment-form")
-          .addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
-
-            const response = await fetch("/submit", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
-
-            const result = await response.json();
-            alert(result.message);
-          });
-      </script> -->
     </div>
   </body>
 </html>
