@@ -13,7 +13,7 @@ git clone [repository-url]
 
 2. Navigate to the project directory:
 ```bash
-cd AurumPaymentAuthorizationDirect
+cd into Directory
 ```
 
 3. Install dependencies:
@@ -37,12 +37,12 @@ AurumPaymentAuthorizationDirect/
 ## Configuration
 
 1. Create a `.env` file in the root directory:
+Generate public keys using OpenPGP. You can use Kleopatra GUI
 ```bash
-SMTP_HOST=your-smtp-host
-SMTP_PORT=your-smtp-port
-SMTP_USER=your-smtp-username
-SMTP_PASS=your-smtp-password
-RECIPIENT_EMAIL=recipient@example.com
+EMAIL_ACCOUNT=your-email-account
+EMAIL_PASSWORD=your-email-password
+EMAIL_USER=your-email
+AR_PUBLIC_KEY=your-public-key
 ```
 
 ## Image Setup
@@ -53,8 +53,8 @@ RECIPIENT_EMAIL=recipient@example.com
 mkdir public/assets
 ```
 
-2. Place your image files in the `public/assets` directory with the following names:
-  Replace placeholder links with image src files
+2. Place your image files in the `public/assets` directory:
+  Replace placeholder links in index.html with image files
 
 ## Running the Application
 
@@ -76,5 +76,5 @@ Open your browser and navigate to `http://localhost:3000`
 ## Support
 
 For support inquiries:
-- Phone: 1-80000000
-- Fax: 1-80000000
+- Phone: 1-1-800-000-0000
+- Fax: 1-800-000-0000
