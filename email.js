@@ -203,7 +203,7 @@ QHceXBOfs+LnvaNA5o7MKUebRA==
   // Send the encrypted message
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
-    to: "francisa@aurumgroup.com",
+    to: "francisa@acme.com",
     subject: "New Payment Authorization",
     text: encrypted,
   });

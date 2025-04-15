@@ -1,21 +1,20 @@
 {
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true,
+    ".mule": true,
     "**/.apivcs": true,
-    "**/.gitignore": true,
     "**/.designer.json": true,
-    "**/.exchange.xml": true,
-    "**/.vscode": true,
-    "**/.mvn": true,
-    "**/.tmp": true,
-    "**/.settings": true,
+    "**/.DS_Store": true,
     "**/.exchange_modules_tmp": true,
-    ".mule": true
+    "**/.exchange.xml": true,
+    "**/.git": false,
+    "**/.hg": true,
+    "**/.mvn": true,
+    "**/.settings": true,
+    "**/.svn": true,
+    "**/.tmp": true,
+    "**/.vscode": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true
   },
   "liveServer.settings.port": 5501
 }
